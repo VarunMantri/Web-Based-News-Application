@@ -1,1 +1,18 @@
-
+<html>
+    <head><title>Index Page</title></head>
+    <body>
+        <h1>Fun with countries</h1>
+        <form action="./countriesdb" method="GET" >
+            Select category:
+            <select name="category">
+                <option value="CN">Country</option>
+                <option value="RG">Region</option>
+                <option value="CO">Calling Code</option>
+                <option value="CC">Capital City</option>
+            </select>
+            &nbsp;&nbsp;
+            Search:<input type="text" name="searchFor" placeholder="Search">
+            <input type="submit" value="search">
+        </form>
+    </body>
+</html>
