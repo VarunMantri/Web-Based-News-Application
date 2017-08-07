@@ -1,3 +1,6 @@
+# author: Varun Rajiv Mantri
+# Update -Server: This server communicates with the online API and makes REST calls to fetch JSON content.
+# After cheking that the links in the received content are live, it stores the data locall by communicating with Mongo Server
 from pymongo import MongoClient
 from pprint import pprint
 import requests
@@ -16,7 +19,7 @@ def main():
     db.verifiedURL.drop()
     print("Updating new feeds.....")
     
-    #the collection in this db  is going to be called as a verified_url
+    
 
     queryList = {
         'Economics':['the-wall-street-journal', 'the-economist', 'financial-times','fortune'],
