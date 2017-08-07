@@ -35,7 +35,7 @@ def main():
         temp=queryList[key]
         good_url=[]
         for item in temp:
-            data=requests.get("https://newsapi.org/v1/articles?source="+item+"&sortBy=top&apiKey=3b141f9080834b9bbc6c2ce4d057d9e1")
+            data=requests.get("https://newsapi.org/v1/articles?source="+item+"&sortBy=top&apiKey=00000000000000")
             data=data.json()
             if data["status"]!='error':
                 for component in data["articles"]:
