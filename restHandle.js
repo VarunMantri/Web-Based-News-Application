@@ -1,3 +1,7 @@
+//author : Varun Rajiv Mantri
+//This is a routes file which handles all the get requests on ('/') route
+
+
 var express=require("express");
 var bodyParser=require("body-parser");
 var request=require("request");
@@ -7,11 +11,11 @@ var config=require("./config.js");
 var asyn=require("async");
 
 
-//making connections with local database
 var router=express.Router();
 
 router.use(bodyParser.json());
 
+//handling the default route
 router.route("/")
 .get(function(req,res,next)
 {
@@ -20,6 +24,7 @@ router.route("/")
     {
         category="General" ;       
     }
+    //connecting to the data base to pull latest news feeds
     MongoClient.connect(config.url,function(err,db){
         if (err) throw err;
         console.log("database connected");
@@ -31,34 +36,9 @@ router.route("/")
                 {
                     tempData.push({'url':item["url"],'title':item["title"],'urlToImage':item["urlToImage"],'description':item["description"]})
                 });
+                //once the responce is built into JSON formatted list, it is sent to the searchResults.ejs page where 
+                //all the data is rendered and sent to clinet browser as a document
                 res.render("searchResults",{parsedData:tempData});
-                /*
-                asyn.forEachOfSeries(docs[0].data,function(item,key,callback)
-                {
-                    request(item,function(err,responce,body)
-                    {
-                       if(err!=true && responce.statusCode==200)
-                        {
-                            var parsedData=JSON.parse(body);
-                            tempData.push(parsedData.articles);
-                        }
-                       callback();
-                    });   
-                    
-                },
-                function (err)
-                {
-                    if (err)
-                    {
-                        res.render("errorPage");
-                    }
-                    else
-                    {
-                        res.render("searchResults",{parsedData:tempData});
-                    }
-                });
-        
-                */
         });});
 });
 
